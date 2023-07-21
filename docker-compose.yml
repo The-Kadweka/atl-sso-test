@@ -15,7 +15,7 @@ services:
         networks:
                 - atlancis
    odoo:
-        image: atlancis:odoo-15.0
+        image: atlancis:odoo-16.0
         restart: always
         ports:
                 - 8069:8069
