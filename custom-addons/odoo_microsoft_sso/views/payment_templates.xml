@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+    <template id="hyperpay_shop_payment" inherit_id="payment.payment_tokens_list">
+
+      <xpath expr="//form/div" position="inside">
+        <t t-if="mode == 'payment'" t-foreach="acquirers" t-as="acq">
+        <t t-if="acq.provider == 'hyperpay'">
+            <div id="hyperpay_payment_acq" >
+              <iframe t-attf-srcdoc="{{style_css}}{{scriptTag}}{{shopperResultUrlTag}}" style="width:100%; height:21em; border:none;">
+              <p>Your browser does not support iframes.</p>
+            </iframe>
+              <input class="hidden" t-if='checkoutId' type="hidden" name="checkoutId" t-att-value="checkoutId"/>
+              <!-- <input t-if='scriptUrl' type="hidden" name="scriptUrl" t-att-value="scriptUrl"/>
+              <input t-if='shopperResultUrlTag' type="hidden" name="shopperResultUrlTag" t-att-value="shopperResultUrlTag"/> -->
+            </div>
+          </t>
+        </t>
+      </xpath>
+    </template>
+  </data>
+</odoo>
