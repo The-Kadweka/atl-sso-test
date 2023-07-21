@@ -26,6 +26,7 @@ services:
                 - db
         volumes:
                 - ./config:/etc/odoo
+                - .:/mnt/extra-addons
                 - odoo-data:/var/lib/odoo
         networks:
                 - atlancis
