@@ -15,7 +15,7 @@ jobs:
           port: ${{secrets.SSH_PORT}} # SSH server port
           script_stop: true # Will stop build incase of any failures
           script: |
-            cd /home/odoo/odoo
+            cd /home/root/odoo
             git pull origin main
             docker build -t atlancis:odoo-16.0 .
             docker-compose down
