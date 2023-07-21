@@ -5,5 +5,5 @@ ENV DEBIAN_FRONTEND=noninteractive LANG=C.UTF-8
 RUN apt-get update
 
 COPY . /mnt/extra-addons
-RUN pip3 install -r /mnt/extra-addons/requirements.txt
+RUN pip3 install PyJWT
 USER odoo
