@@ -10,7 +10,7 @@ services:
     volumes:
       - kadwekadb:/var/lib/postgresql/data/pgdata
   odoo15:
-    image: odoo:15.0
+    image: odoo:16.0
     command: --dev=all
     ports:
       - 8089:8069
