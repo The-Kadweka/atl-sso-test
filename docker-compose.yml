@@ -1,37 +1,25 @@
 version: '2'
 services:
-   db:
-        image: postgres:12
-        restart: always
-        environment:
-                - POSTGRES_USER=odoo
-                - POSTGRES_PASSWORD=odoo
-                - POSTGRES_DB=postgres
-                - PGDATA=/var/lib/postgresql/data/pgdata
-        ports:
-                - 51515:5432
-        volumes:
-                - db-data:/var/lib/postgresql/data/pgdata
-        networks:
-                - atlancis
-   odoo:
-        image:  odoo:16.0
-        restart: always
-        ports:
-                - 8069:8069
-                - 8072:8072
-        links:
-                - db:db
-        depends_on:
-                - db
-        volumes:
-                - ./config:/etc/odoo
-                - .:/mnt/extra-addons
-                - odoo-data:/var/lib/odoo
-        networks:
-                - atlancis
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - kadwekadb:/var/lib/postgresql/data/pgdata
+  odoo15:
+    image: odoo:15.0
+    command: --dev=all
+    ports:
+      - 8089:8069
+    links:
+      - db:db
+    volumes:
+      - ./config:/etc/odoo
+      - .:/mnt/extra-addons
+      - kadwekaodoo:/var/lib/odoo
 volumes:
-        odoo-data:
-        db-data:
-networks:
-        atlancis:
+  kadwekadb:
+  kadwekaodoo:
