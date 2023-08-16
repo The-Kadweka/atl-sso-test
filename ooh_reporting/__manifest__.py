@@ -15,11 +15,12 @@
     'depends': ['purchase', 'account', 'sale_management','stock'],
     # always loaded
     'data': [
+        'reports/proformerInvoice.xml',
         'reports/purchaseOrder.xml',
         'reports/saleOrder.xml',
         'reports/view_inherit.xml',
         'reports/deliveryNote.xml',
-        'reports/withoutEtrInvoice.xml',
+        'reports/etrInvoice.xml',
         'views/printAction.xml'
     ],
 }
