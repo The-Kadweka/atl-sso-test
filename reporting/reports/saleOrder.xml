@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <template id="ooh_sale_order_reporting">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <data>
+                                <div class="header">
+                                    <div class="row">
+                                        <div class="first-page col-7" style="background-color:#90B622; padding: 40px; font-size: 30px;">
+                                            <span style="color:#FFFFFF">
+                                                <strong>SALE ORDER</strong>
+                                            </span>
+                                        </div>
+                                        <div class="col-5" style='margin-left: 100px;'>
+                                            <img class="img-fluid" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}" style="max-height: 150px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-size: 18px; margin-top: 25px;">
+                                    <div class="col-6">
+                                        <span style="color:#FFFFFF">Customer Details</span>
+                                        <br />
+                                        <span>
+                                            <strong>Company Name:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.display_name" />
+                                        <br />
+                                        <span>
+                                            <strong>Address:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.street" />
+,                                        <span t-field="doc.partner_id.city" />
+,                                        <span t-field="doc.partner_id.country_id.name" />
+                                        <br />
+                                        <span>
+                                            <strong>Tell Number:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.mobile" />
+                                        <br />
+                                        <span>
+                                            <strong>Email Address:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.email" />
+                                        <br />
+                                        <span>
+                                            <strong>Supplier PIN:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.vat" />
+                                    </div>
+
+                                    <div class="col-6" style="margin-left: 100px;">
+                                        <span>
+                                            <strong>Date:</strong>
+                                        </span>
+                                        <!-- <span t-field="doc.date_planned" /> -->
+                                        <br />
+                                        <span>
+                                            <strong>PIN No:</strong>
+                                        </span>
+                                        <span t-field="doc.company_id.vat" />
+                                        <br />
+                                        <span>
+                                            <strong>Order No:</strong>
+                                        </span>
+                                        <span t-field="doc.name" />
+                                        <br />
+                                        <span>
+                                            <strong>Due Date:</strong>
+                                        </span>
+                                        <span t-field="doc.date_order" />
+                                        <br />
+                                        <span>
+                                            <strong>Currency:</strong>
+                                        </span>
+                                        <!-- <span t-field="doc.pricelist_id.currency_id.name" /> -->
+                                        <br />
+                                    </div>
+                                </div>
+                                <table class="table o_report_block_table table-bordered" style="margin-top:15px; border: 2px solid #000000 !important;">
+                                    <thead>
+                                        <tr style="background-color:#FFFFFF;">
+                                            <!-- TODO: remove in master -->
+                                            <t t-set="colspan" t-value="6" />
+                                            <th>
+                                                <span style="color:#000000">PRODUCT</span>
+                                            </th>
+                                            <th>
+                                                <span style="color:#000000">DESCRIPTION</span>
+                                            </th>
+                                            <!-- <th>
+                                                <span style="color:#FFFFFF">SERIAL NUMBER</span>
+                                            </th> -->
+                                            <th>
+                                                <span style="color:#000000">QTY</span>
+                                            </th>
+                                            <th t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                                <span style="color:#000000">UNIT NET PRICE</span>
+                                            </th>
+
+                                            <th class="text-right">
+                                                <span groups="account.group_show_line_subtotals_tax_excluded" style="color:#000000">TOTAL</span>
+                                                <span groups="account.group_show_line_subtotals_tax_included" style="color:#000000">TOTAL</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody class="invoice_tbody">
+                                        <t t-foreach="doc.order_line" t-as="line">
+                                            <tr t-att-class="'bg-200 font-weight-bold doc_line_section' if line.display_type == 'line_section' else 'font-italic doc_line_note' if line.display_type == 'line_note' else ''">
+                                                <td name="product_template_id" style="border: 2px solid #000000;">
+                                                    <span t-field="line.product_template_id.name" />
+                                                </td>
+                                                <td name="name" style="border: 2px solid #000000;">
+                                                    <span t-field="line.name" />
+                                                </td>
+
+                                                <td style="border: 2px solid #000000;">
+                                                    <span t-field="line.product_uom_qty" />
+                                                </td>
+                                                <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="border: 2px solid #000000;">
+                                                    <span t-field="line.price_unit" />
+                                                </td>
+                                                <td class="text-right doc_price_total" style="border: 2px solid #000000;">
+                                                    <span t-field="line.price_subtotal" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-5" />
+                                    <div class="col-5 offset-2">
+                                        <table class="table table-sm o_report_block_total table-bordered" style="border: 2px solid #000000 !important;">
+                                            <tr class="border-black o_subtotal">
+                                                <td style="border: 2px solid #000000;">
+                                                    <strong>SUB TOTAL</strong>
+                                                </td>
+                                                <td class="text-right" style="border: 2px solid #000000;">
+                                                    <span t-field="doc.amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': doc.pricelist_id.currency_id}" />
+                                                </td>
+                                            </tr>
+                                            <tr class="border-black o_subtotal">
+                                                <td style="border: 2px solid #000000;">
+                                                    <strong>Taxes on <span t-field="doc.amount_untaxed" />
+                                                    </strong>
+                                                </td>
+                                                <td class="text-right" style="border: 2px solid #000000;">
+                                                    <span t-field="doc.amount_tax" t-options="{'widget': 'monetary', 'display_currency': doc.pricelist_id.currency_id}" />
+                                                </td>
+                                            </tr>
+                                            <tr class="border-black o_subtotal">
+                                                <td style="border: 2px solid #000000;">
+                                                    <strong>GRAND TOTAL</strong>
+                                                </td>
+                                                <td class="text-right" style="border: 2px solid #000000;">
+                                                    <span t-field="doc.amount_total" t-options="{'widget': 'monetary', 'display_currency': doc.pricelist_id.currency_id}" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="row" style="margin-top: 50px;font-family:">
+                                    <div class="col">
+                                        <span style="color:#000000; font-size: 20px">
+                                            <strong>Terms and
+                                            Conditions</strong>
+                                        </span>
+                                        <br />
+                                        <!-- <span t-field="doc.notes" /> -->
+                                        <br />
+                                        <span>Please supply the following materials or services to
+                                            the specified
+                                            address
+                                            in accordance with the instructions above and the
+                                            conditions of
+                                            purchase. If
+                                            you did not receive the conditions of purchase with this
+                                            order
+                                            please
+                                            contact us.</span>
+                                        <br />
+                                        <br />
+                                        <span>The LPO No. must appear on all invoices, packages,
+                                            shipping papers
+                                            and
+                                            correspondence referring to this order. A delivery note
+                                            must
+                                            accompany the
+                                            goods.</span>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <center class="row ">
+                                        <tr>
+                                            <b>
+                                                <t t-esc="doc.company_id.name" />
+ |                                                <t t-esc="doc.company_id.street" />
+ |                                                <t t-esc="doc.company_id.street2" />
+,                                                <t t-esc="doc.company_id.city" />
+,                                                <t t-esc="doc.company_id.state_id.name" />
+,                                                <t t-esc="doc.company_id.phone" />
+ |                                                <t t-esc="doc.company_id.email" />
+ |                                                <t t-esc="doc.company_id.website" />
+                                            </b>
+                                        </tr>
+                                        <br />
+
+                                        <span class="page" />
+ /                                        <span class="topage" />
+                                    </center>
+                                </div>
+                            </data>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

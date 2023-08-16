@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_stock_inherit_picking">
+        <field name="name">stock.picking.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="priority" eval="50" />
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[1]/field[@name='partner_id']"
+                position="after">
+                <field name="contact_person" />
+                <field name="contact_phone" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

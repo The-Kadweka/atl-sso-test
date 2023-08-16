@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <template id="ooh_custom_delivery_note">
+            <t t-call="web.html_container">
+                <t t-call="web.basic_layout">
+                    <t t-foreach="docs" t-as="doc">
+                        <div class="page">
+                            <data>
+                                <div class="header">
+                                    <div class="row">
+                                        <div class="first-page col-7" style="background-color:#90B622; padding: 40px; font-size: 30px;">
+                                            <span style="color:#FFFFFF">
+                                                <strong>DELIVERY NOTE</strong>
+                                            </span>
+                                        </div>
+                                        <div class="col-5" style='margin-left: 100px;'>
+                                            <img class="img-fluid" t-attf-src="data:image/*;base64,{{doc.company_id.logo}}" style="max-height: 150px;" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-size: 18px; margin-top: 25px;">
+                                    <div class="col-6">
+                                        <span>
+                                            <strong>Customer Details</strong>
+                                        </span>
+                                        <br />
+                                        <span>
+                                            <strong>Company Name:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.display_name" />
+                                        <br />
+                                        <span>
+                                            <strong>Address:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.street" />
+,                                        <span t-field="doc.partner_id.city" />
+,                                        <span t-field="doc.partner_id.country_id.name" />
+                                        <br />
+                                        <span>
+                                            <strong>Tell Number:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.mobile" />
+                                        <br />
+                                        <span>
+                                            <strong>Email:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.email" />
+                                        <br />
+                                        <span>
+                                            <strong>Customer PIN:</strong>
+                                        </span>
+                                        <span t-field="doc.partner_id.vat" />
+                                    </div>
+                                    <div class="col-6" style="margin-left: 100px">
+                                        <span>
+                                            <strong>Date:</strong>
+                                        </span>
+                                        <span t-field="doc.scheduled_date" />
+                                        <br />
+                                        <span>
+                                            <strong>Delivery Note No:</strong>
+                                        </span>
+                                        <span t-field="doc.name" />
+                                        <br />
+                                        <span>
+                                            <strong>Contact Person:</strong>
+                                        </span>
+                                        <!-- <span t-field="doc.x_studio_atlancis_contact_person" /> -->
+                                        <br />
+                                        <span>
+                                            <strong>Contact Phone:</strong>
+                                        </span>
+                                        <!-- <span t-field="doc.x_studio_contact_phone" /> -->
+                                        <br />
+                                        <span>
+                                            <strong>Sales Order No:</strong>
+                                        </span>
+                                        <span t-field="doc.origin" />
+                                        <br />
+                                    </div>
+                                </div>
+                                <table class="table o_report_block_table table-bordered" style="margin-top:15px; border: 2px solid #000000 !important;">
+                                    <thead>
+                                        <tr style="background-color:#FFFFFF;">
+                                            <!-- TODO:remove in master -->
+                                            <t t-set="colspan" t-value="6" />
+                                            <th>
+                                                <span style="color:#000000">ITEM</span>
+                                            </th>
+                                            <th>
+                                                <span style="color:#000000">PART NO/CSI NO</span>
+                                            </th>
+                                            <th>
+                                                <span style="color:#000000">SERIAL NUMBER</span>
+                                            </th>
+                                            <th>
+                                                <span style="color:#000000">QTY</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr t-foreach="doc.move_line_ids" t-as="move_ids" style="border: 2px solid #000000;">
+                                            <td style="border: 2px solid #000000;">
+                                                <span t-field="move_ids.product_id.display_name" />
+                                            </td>
+                                            <td style="border: 2px solid #000000;">
+                                                <!-- <span t-field="move_ids.x_studio_csi_number" /> -->
+                                            </td>
+
+                                            <td style="border: 2px solid #000000;">
+                                                <!-- <span t-field="move_ids.x_serial_number" /> -->
+                                            </td>
+                                            <td style="border: 2px solid #000000;">
+                                                <!-- <span t-field="move_ids.qty_done" /> -->
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row" style="margin-top: 100px; font-size: 13px">
+                                    <div class="col-6">
+                                        <span style="color:#000000">
+                                            <strong>Delivered By</strong>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span>
+                                            <strong>Name:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                        <br />
+                                        <span>
+                                            <strong>Designation:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                        <br />
+                                        <span>
+                                            <strong>Date:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                        <br />
+                                        <span>
+                                            <strong>Signature:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                    </div>
+                                    <div class="col-6" style="border-left:2px solid #000000; border-right:2px solid #000000; border-top: 2px solid #000000; border-bottom: 2px solid #000000; background-color: #D8DFEA;">
+                                        <span style="color:#000000">
+                                            <strong>Stamp</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 100px; font-size: 13px">
+                                    <div class="col-6">
+                                        <span style="color:#000000">
+                                            <strong>CUSTOMER ACKNOWLEDGEMENT</strong>
+                                        </span>
+                                        <br />
+                                        <span style="color:#000000">
+                                            <strong>Received in good condition</strong>
+                                        </span>
+                                        <br />
+                                        <br />
+                                        <span>
+                                            <strong>Name:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                        <br />
+                                        <span>
+                                            <strong>Designation:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                        <br />
+                                        <span>
+                                            <strong>Date:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                        <br />
+                                        <span>
+                                            <strong>Signature:</strong>
+                                        </span>
+                                        <hr style="border: 1px solid #000000;" />
+                                    </div>
+                                    <div class="col-6" style="border-left:2px solid #000000; border-right:2px solid #000000; border-top: 2px solid #000000; border-bottom: 2px solid #000000; background-color: #D8DFEA;">
+                                        <span style="color:#00004c">
+                                            <strong>Stamp</strong>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="footer">
+                                    <hr />
+                                    <center class="row ">
+                                        <tr>
+                                            <b>
+                                                <t t-esc="doc.company_id.name" />
+ |                                                <t t-esc="doc.company_id.street" />
+ |                                                <t t-esc="doc.company_id.street2" />
+,                                                <t t-esc="doc.company_id.city" />
+,                                                <t t-esc="doc.company_id.state_id.name" />
+,                                                <t t-esc="doc.company_id.phone" />
+ |                                                <t t-esc="doc.company_id.email" />
+ |                                                <t t-esc="doc.company_id.website" />
+                                            </b>
+                                        </tr>
+                                        <br />
+
+                                        <span class="page" />
+ /                                        <span class="topage" />
+                                    </center>
+                                </div>
+                            </data>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

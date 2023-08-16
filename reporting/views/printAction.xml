@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data noupdate="0">
+        <record id="action_report_proforma_move" model="ir.actions.report">
+            <field name="name">Proforma move</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ooh_reporting.oo_proforma_move_report</field>
+            <field name="report_file">ooh_reporting.oo_proforma_move_report</field>
+            <field name="print_report_name">'Proforma move %s' % object.name</field>
+            <field name="binding_model_id" ref="account.model_account_move" />
+            <field name="binding_type">report</field>
+        </record>
+        <!-- <record id="action_report_without_etr" model="ir.actions.report">
+            <field name="name">Invoice Without Etr</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ooh_reporting.ooh_invoice_without_etr</field>
+            <field name="report_file">ooh_reporting.ooh_invoice_without_etr</field>
+            <field name="print_report_name">'Invoice Without etr %s' % object.name</field>
+            <field name="binding_model_id" ref="account.model_account_move" />
+            <field name="binding_type">report</field>
+        </record> -->
+        <record id="action_report_with_etr" model="ir.actions.report">
+            <field name="name">Invoice</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ooh_reporting.ooh_invoice_with_etr</field>
+            <field name="report_file">ooh_reporting.ooh_invoice_with_etr</field>
+            <field name="print_report_name">'Invoice %s' % object.name</field>
+            <field name="binding_model_id" ref="account.model_account_move" />
+            <field name="binding_type">report</field>
+        </record>
+        <record id="action_custom_sale" model="ir.actions.report">
+            <field name="name">Sale Order</field>
+            <field name="model">sale.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ooh_reporting.ooh_sale_order_reporting</field>
+            <field name="report_file">ooh_reporting.ooh_sale_order_reporting</field>
+            <field name="print_report_name">'Sale Order for %s' % object.partner_id.name</field>
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_type">report</field>
+        </record>
+        <record id="custom_purchase_order" model="ir.actions.report">
+            <field name="name">Purchase Order</field>
+            <field name="model">purchase.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ooh_reporting.ooh_purchase_order_reporting</field>
+            <field name="report_file">ooh_reporting.ooh_purchase_order_reporting</field>
+            <field name="binding_model_id" ref="purchase.model_purchase_order" />
+            <field name="binding_type">report</field>
+        </record>
+        <record id="custom_delivery_note_action" model="ir.actions.report">
+            <field name="name">Delivery Note</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">ooh_reporting.ooh_custom_delivery_note</field>
+            <field name="report_file">ooh_reporting.ooh_custom_delivery_note</field>
+            <field name="binding_model_id" ref="stock.model_stock_picking" />
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>
